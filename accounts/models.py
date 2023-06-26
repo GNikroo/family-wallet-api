@@ -10,9 +10,9 @@ class Account(models.Model):
     image = models.ImageField(
         upload_to='images/', default='../default_user_fsxard')
     budget = models.ForeignKey(
-        'budget.Budget', default=None, on_delete=models.CASCADE, related_name='budget_account')
+        'budget.Budget', null=True, default=None, on_delete=models.CASCADE, related_name='budget_account')
     grocery_list = models.ForeignKey(
-        'groceries.GroceryItem', on_delete=models.CASCADE, related_name='grocery_list_account')
+        'groceries.GroceryItem', null=True, default=None, on_delete=models.CASCADE, related_name='grocery_list_account')
 
     class Meta:
         ordering = ['-created_at']
