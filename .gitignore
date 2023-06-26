@@ -1,2 +1,6 @@
 .familybudget_api
 env.py
+__pycache__/
+node_modules/
+.github/
+cloudinary_python.txt
