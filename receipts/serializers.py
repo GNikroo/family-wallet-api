@@ -1,8 +1,8 @@
 from rest_framework import serializers
-from .models import Budget
+from .models import Receipt
 
 
-class BudgetSerializer(serializers.ModelSerializer):
+class ReceiptSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
     is_owner = serializers.SerializerMethodField()
 
@@ -11,5 +11,9 @@ class BudgetSerializer(serializers.ModelSerializer):
         return request.user == obj.owner
 
     class Meta:
-        model = Budget
-        fields = '__all__'
+        model = Receipt
+        fields = [
+            'id', 'owner', 'created_at', 'updated_at', 'category',
+            'amount', 'description', 'is_owner', 'date',
+            'budget',
+        ]

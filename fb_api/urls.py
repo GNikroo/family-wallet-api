@@ -15,11 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-
-
-from django.contrib import admin
-from django.urls import include, path
-
+from accounts.views import CustomRegisterView
 from .views import logout_route, root_route
 
 
@@ -28,9 +24,13 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
     path('dj-rest-auth/logout/', logout_route),
+    path('api/rest-auth/registration/',
+         CustomRegisterView.as_view(), name='custom_register'),
     path('dj-rest-auth/', include('dj_rest_auth.urls')),
     path('dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')),  # noqa
     path('', include('accounts.urls')),
+    path('', include('expenses.urls')),
+    path('', include('receipts.urls')),
+    path('', include('baseincome.urls')),
     path('', include('budget.urls')),
-    path('', include('groceries.urls')),
 ]

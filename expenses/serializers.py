@@ -1,8 +1,8 @@
 from rest_framework import serializers
-from .models import GroceryItem
+from .models import Expense
 
 
-class GroceryItemSerializer(serializers.ModelSerializer):
+class ExpenseSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
     is_owner = serializers.SerializerMethodField()
 
@@ -11,5 +11,9 @@ class GroceryItemSerializer(serializers.ModelSerializer):
         return request.user == obj.owner
 
     class Meta:
-        model = GroceryItem
-        fields = '__all__'
+        model = Expense
+        fields = [
+            'id', 'owner', 'created_at', 'updated_at', 'category',
+            'amount', 'description', 'is_owner', 'date',
+            'budget',
+        ]

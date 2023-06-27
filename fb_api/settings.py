@@ -40,6 +40,12 @@ REST_FRAMEWORK = {
 #         'rest_framework.renderers.JSONRenderer',
 #     ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ]
+}
+
 REST_USE_JWT = True
 JWT_AUTH_SECURE = True
 JWT_AUTH_COOKIE = 'my-app-auth'
@@ -87,8 +93,10 @@ INSTALLED_APPS = [
     'dj_rest_auth.registration',
 
     'accounts',
+    'expenses',
+    'receipts',
+    'baseincome',
     'budget',
-    'groceries',
 ]
 
 SITE_ID = 1
