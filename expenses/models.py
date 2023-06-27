@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from baseincome.models import BaseIncome
 from budget.models import Budget
 
 
@@ -18,8 +17,9 @@ class Expense(models.Model):
         ('RENT', 'Rent'),
         ('ENTERTAINMENT', 'Entertainment'),
         ("BILLS", "Bills"),
+        ("CHARITY", "Charity"),
         ("Recurring", "Recurring"),
-        ('OTHERS', 'Others')
+        ('OTHER', 'Other')
     ]
 
     category = models.CharField(choices=CATEGORY_OPTIONS, max_length=255)
@@ -31,12 +31,6 @@ class Expense(models.Model):
     budget = models.ForeignKey(Budget, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
-        base_income = BaseIncome.objects.get(owner=self.owner)
-        base_income.amount -= self.amount
-        base_income.save()
 
     class Meta:
         ordering = ['-updated_at']

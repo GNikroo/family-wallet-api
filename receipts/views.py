@@ -3,7 +3,7 @@ from .models import Receipt
 from rest_framework import permissions, generics
 from rest_framework.views import APIView
 from rest_framework import response
-from baseincome.models import BaseIncome
+from django.db.models import Sum
 
 
 class ReceiptList(generics.ListCreateAPIView):
@@ -23,5 +23,6 @@ class ReceiptDetail(generics.RetrieveUpdateDestroyAPIView):
 
 class TotalReceiptStats(APIView):
     def get(self, request):
-        base_income = BaseIncome.objects.get(user=request.user)
-        return response.Response({'total_amount': base_income.amount})
+        receipt = Receipt.objects.filter(owner=request.user)
+        total_amount = Receipt.aggregate(Sum("amount"))
+        return response.Response(total_amount)

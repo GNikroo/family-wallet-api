@@ -11,7 +11,7 @@ class Account(models.Model):
     image = models.ImageField(
         upload_to='images/', default='../default_user_fsxard')
     default_budget = models.ForeignKey(
-        Budget, on_delete=models.SET_NULL, null=True, blank=True, related_name='account')
+        Budget, on_delete=models.CASCADE, null=True, blank=True, related_name='account')
 
     class Meta:
         ordering = ['-created_at']

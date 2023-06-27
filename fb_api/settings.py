@@ -95,7 +95,6 @@ INSTALLED_APPS = [
     'accounts',
     'expenses',
     'receipts',
-    'baseincome',
     'budget',
 ]
 

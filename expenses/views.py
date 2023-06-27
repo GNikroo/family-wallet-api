@@ -1,9 +1,9 @@
-from .serializers import ExpenseSerializer
-from .models import Expense
 from rest_framework import permissions, generics
 from rest_framework.views import APIView
 from rest_framework import response
-from baseincome.models import BaseIncome
+from .models import Expense
+from .serializers import ExpenseSerializer
+from django.db.models import Sum
 
 
 class ExpenseList(generics.ListCreateAPIView):
@@ -23,5 +23,6 @@ class ExpenseDetail(generics.RetrieveUpdateDestroyAPIView):
 
 class TotalExpenseStats(APIView):
     def get(self, request):
-        base_income = BaseIncome.objects.get(user=request.user)
-        return response.Response({'total_amount': base_income.amount})
+        expenses = Expense.objects.filter(owner=request.user)
+        total_amount = expenses.aggregate(Sum("amount"))
+        return response.Response(total_amount)

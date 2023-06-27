@@ -31,6 +31,5 @@ urlpatterns = [
     path('', include('accounts.urls')),
     path('', include('expenses.urls')),
     path('', include('receipts.urls')),
-    path('', include('baseincome.urls')),
     path('', include('budget.urls')),
 ]
