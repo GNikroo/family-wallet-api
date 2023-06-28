@@ -9,7 +9,7 @@ from django.db.models import Sum
 class ExpenseList(generics.ListCreateAPIView):
     serializer_class = ExpenseSerializer
     queryset = Expense.objects.order_by('-created_at')
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
@@ -17,7 +17,7 @@ class ExpenseList(generics.ListCreateAPIView):
 
 class ExpenseDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ExpenseSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     queryset = Expense.objects.order_by('-created_at')
 
 

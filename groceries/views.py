@@ -9,7 +9,7 @@ from django.db.models import Sum
 class GroceryItemList(generics.ListCreateAPIView):
     serializer_class = GrocerySerializer
     queryset = GroceryItem.objects.order_by('-created_at')
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
@@ -17,7 +17,7 @@ class GroceryItemList(generics.ListCreateAPIView):
 
 class GroceryItemDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = GrocerySerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     queryset = GroceryItem.objects.order_by('-created_at')
 
 

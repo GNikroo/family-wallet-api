@@ -5,7 +5,7 @@ from rest_framework import permissions, generics
 
 class BudgetList(generics.ListCreateAPIView):
     serializer_class = BudgetSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def get_queryset(self):
         return Budget.objects.all()
@@ -16,7 +16,7 @@ class BudgetList(generics.ListCreateAPIView):
 
 class BudgetDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = BudgetSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     queryset = Budget.objects.all()
 
     def get_serializer_context(self):
