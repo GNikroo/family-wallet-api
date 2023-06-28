@@ -16,13 +16,12 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Expense',
+            name='GroceryItem',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('category', models.CharField(choices=[('ONLINE_SHOPPING', 'Online'), ('CLOTHING', 'Clothing'), ('TOYS', 'Toys'), ('SYSTEM', 'System Bolaget'), ('CONVENIENCE', 'Convenience'), ('VOLVO', 'Volvo'), ('TRAVEL', 'Travel'), ('TAKEOUT', 'Takeout'), ('RENT', 'Rent'), ('ENTERTAINMENT', 'Entertainment'), ('BILLS', 'Bills'), ('CHARITY', 'Charity'), ('Recurring', 'Recurring'), ('OTHER', 'Other')], max_length=255)),
+                ('item', models.CharField(max_length=100)),
+                ('description', models.TextField(blank=True, null=True)),
                 ('amount', models.DecimalField(decimal_places=2, max_digits=10, max_length=255)),
-                ('description', models.TextField()),
-                ('date', models.DateField()),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
                 ('updated_at', models.DateTimeField(auto_now=True)),
                 ('budget', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='budget.budget')),

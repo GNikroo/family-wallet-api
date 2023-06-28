@@ -96,6 +96,7 @@ INSTALLED_APPS = [
     'expenses',
     'receipts',
     'budget',
+    'groceries',
 ]
 
 SITE_ID = 1

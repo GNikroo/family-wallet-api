@@ -23,6 +23,6 @@ class ReceiptDetail(generics.RetrieveUpdateDestroyAPIView):
 
 class TotalReceiptStats(APIView):
     def get(self, request):
-        receipt = Receipt.objects.filter(owner=request.user)
-        total_amount = Receipt.aggregate(Sum("amount"))
+        receipts = Receipt.objects.filter(owner=request.user)
+        total_amount = receipts.aggregate(Sum("amount"))
         return response.Response(total_amount)

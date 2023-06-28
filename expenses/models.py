@@ -36,4 +36,4 @@ class Expense(models.Model):
         ordering = ['-updated_at']
 
     def __str__(self):
-        return f"{self.id}"
+        return self.id
